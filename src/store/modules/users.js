@@ -9,6 +9,9 @@ export default {
     },
     changeLoadingStatus: (state, newStatus) => {
       state.loadingStatus = newStatus
+    },
+    addUserToState: (state, user) => {
+      state.users.unshift(user)
     }
   },
   actions: {

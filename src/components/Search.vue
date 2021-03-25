@@ -1,7 +1,6 @@
 <template>
   <div class="search">
     <input type="text" v-model="value" placeholder="Найти...">
-    <button>Найти</button>
   </div>
 </template>
 
