@@ -1,5 +1,6 @@
 <template>
   <div class="small-data">
+    <AddForm />
     <Search />
     <Table sizeData="small" />
   </div>
@@ -8,12 +9,14 @@
 <script>
 import Table from '../components/Table'
 import Search from '../components/Search'
+import AddForm from '../components/AddForm'
 
 export default {
   name: 'SmallData',
   components: {
     Table,
-    Search
+    Search,
+    AddForm
   }
 }
 </script>
