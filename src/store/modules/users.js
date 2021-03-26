@@ -40,6 +40,6 @@ export default {
     usersGetter: state => state.users,
     loadingStatusGetter: state => state.loadingStatus,
     userForCartGetter: state => index => state.users[index],
-    filterUser: state => str => state.users.filter(user => user.id == str || user.firstName === str || user.lastName === str || user.email === str || user.phone == str),
+    filterUser: state => str => state.users.filter(user => user.id.toString().includes(str) || user.firstName.includes(str) || user.lastName.includes(str) || user.email.includes(str) || user.phone.includes(str))
   }
 }

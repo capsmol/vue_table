@@ -46,8 +46,8 @@
           <tr
             v-for="(user, i) in (searchStringGetter? filterUser(searchStringGetter) : paginatedUsers)"
             :key="i"
-            @click="selectUser(i)"
-            :class="{'tr-active': i === trNumber}">
+            @click="selectUser(user, i)"
+            :class="{'tr-active': user === selectedUser}">
             <td>{{user.id}}</td>
             <td>{{user.firstName}}</td>
             <td>{{user.lastName}}</td>
@@ -67,7 +67,7 @@
         </div>
       </div>
     </template>
-    <CartUser v-if="showCart" :index="indexUser" />
+    <CartUser v-if="showCart" :user="selectedUser" />
   </div>
 </template>
 
@@ -97,7 +97,7 @@ export default {
       reverse: false,
       sortingStatus: '',
       showCart: false,
-      indexUser: 0
+      selectedUser: {}
 
     }
   },
@@ -184,10 +184,10 @@ export default {
         this.sortingStatus = 'decreasePhone'
       }
     },
-    selectUser(index) {
+    selectUser(user, index) {
       this.showCart = true
-      this.indexUser = index
       this.trNumber = index
+      this.selectedUser = user
     }
   },
   mounted() {
@@ -202,10 +202,6 @@ export default {
 </script>
 
 <style lang="scss">
-.table-container {
-
-}
-
 table {
   table-layout: fixed;
   border: 1px solid gray;

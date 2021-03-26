@@ -4,10 +4,10 @@
     <span>Описание:</span>
     <textarea v-model="description">
     </textarea>
-    <span>Адрес проживания: <b>{{user.address.streetAddress}}</b></span>
-    <span>Город: <b>{{user.address.city}}</b></span>
-    <span>Провинция/штат: <b>{{user.address.state}}</b></span>
-    <span>Индекс: <b>{{user.address.zip}}</b></span>
+    <span>Адрес проживания: <b>{{user.address ? user.address.streetAddress : 'Адрес не указан'}}</b></span>
+    <span>Город: <b>{{user.address ? user.address.city : 'Город не указан'}}</b></span>
+    <span>Провинция/штат: <b>{{user.address ? user.address.state : 'Штат не указан'}}</b></span>
+    <span>Индекс: <b>{{user.address ? user.address.zip : 'Индекс не указан'}}</b></span>
   </div>
 </template>
 
@@ -17,10 +17,12 @@ import {mapGetters} from 'vuex'
 export default {
   name: 'CartUser',
   props: {
-    index: {
-      type: Number,
+    user: {
+      type: Object,
       required: true,
-      default: 0
+      default() {
+        return {}
+      }
     }
   },
   data() {
@@ -32,18 +34,15 @@ export default {
     ...mapGetters([
       'userForCartGetter'
     ]),
-    user() {
-      return this.userForCartGetter(this.index)
-    },
     fullName() {
       return this.user.firstName + ' ' + this.user.lastName
     },
   },
   mounted() {
-    this.description = this.user.description
+    this.description = this.user.description ? this.user.description : 'Описание отсутствует'
   },
   updated() {
-    this.description = this.user.description
+    this.description = this.user.description ? this.user.description : 'Описание отсутствует'
   }
 
 }
